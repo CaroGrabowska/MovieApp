@@ -1,5 +1,11 @@
+# Hidden system files
 .DS_Store
+
+# npm
 node_modules
+package-lock.json
+
+# deploy files
 /dist
 
 # local env files
