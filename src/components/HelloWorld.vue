@@ -1,7 +1,6 @@
 <template>
   <div class="hello">
     <p>{{ getAvailableMovieList }}</p>
-
   </div>
 </template>
 
