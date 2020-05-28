@@ -1,1 +1,4 @@
 export const SET_AVAILABLE_LIST = 'SET_AVAILABLE_LIST';
+export const SET_FILTER_TERM = 'SET_FILTER_TERM';
+export const SET_SEARCH_TERM = 'SET_SEARCH_TERM';
+export const SET_PAGES = 'SET_PAGES';
