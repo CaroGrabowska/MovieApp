@@ -1,0 +1,1 @@
+export const SET_AVAILABLE_LIST = 'SET_AVAILABLE_LIST';
