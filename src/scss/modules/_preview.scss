@@ -1,0 +1,79 @@
+// =========================
+// PREVIEW
+// =========================
+
+.single-preview {
+  @include position-flex(column, false, false);
+  @include size-custom(280px, 400px);
+  @include size-max(280px, 450px);
+  @include margin(20px, 10px, 20px, 10px);
+  @include border-radius(10px);
+  box-shadow: $box-shadow;
+
+  &__img{
+    @include size-custom(100%, 55%);
+
+    img {
+       @include size-custom(100%, 100%);
+
+       border-top-right-radius: 10px;
+       border-top-left-radius: 10px;
+       object-fit: cover;
+    }
+  }
+
+  &__info{
+    @include size-custom(100%, 35%);
+    @include padding(10px, 10px, 0, 10px);
+    box-sizing: border-box;
+  }
+
+  &__title{
+    font-family: $font-face;
+    font-size: 18px;
+    font-weight : map_get($font-weight, medium);
+    color: map_get($navy-scale-colors, navy-200);
+    letter-spacing: 1.2px;
+  }
+
+  &__orgtitle{
+    font-family: $font-face;
+    font-size: 11px;
+    font-weight : map_get($font-weight, normal);
+    color: map_get($navy-scale-colors, navy-200);
+    letter-spacing: 1px;
+  }
+
+  &__vote{
+    @include margin(5px,0, 5px, 0);
+    font-family: $font-face;
+    font-size: 25px;
+    font-weight : map_get($font-weight, semi-bold);
+    color: map_get($navy-scale-colors, navy-200);
+    letter-spacing: 1px;
+
+    svg {
+      @include size-custom(25px, 25px);
+      @include padding(0, 5px, 0, 0);
+      @include margin(0, 0, 0, 0);
+    }
+  }
+
+  &__view{
+     @include position-flex(column, flex-start, center);
+     @include size-custom(100%, 20%);
+     @include padding(0, 10px, 0, 5px);
+  }
+
+  &__button{
+    @include padding(10px, 30px, 10px, 30px);
+    @include margin(0, 0, 0, 5px);
+    @include background-color(map_get($yellow-scale-colors, yellow-100));
+    @include border-radius(20px);
+    font-family: $font-face;
+    font-size: 15px;
+    font-weight : map_get($font-weight, medium);
+    color: map_get($white-scale-colors, white-100);
+    letter-spacing: 1px;
+  }
+}

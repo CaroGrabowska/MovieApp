@@ -1,14 +1,19 @@
 <template>
   <div class="filter">
-    <label for="toprated">Top Rated
+    <label
+      for="toprated"
+      class="button"
+    >Top Rated
       <input
         id="toprated"
         type="radio"
+        class="button__input"
         value="top_rated"
         name="filter"
         v-model="filterStatus"
         @change="setFilter(filterStatus)"
       >
+      <div>Top Rated</div>
     </label>
     <label for="nowplaying">Now playing
       <input

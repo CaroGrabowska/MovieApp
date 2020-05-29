@@ -1,0 +1,26 @@
+//=========================
+// PLACEHOLDERS
+// =========================
+
+@mixin placeholder($font-family, $color, $font-size, $opacity) {
+  &::-moz-placeholder {
+    font-family: $font-family;
+    color: $color;
+    opacity: $opacity;
+    font-size: $font-size;
+  }
+
+  &::-ms-input-placeholder {
+    font-family: $font-family;
+    color: $color;
+    opacity: $opacity;
+    font-size: $font-size;
+  }
+
+  &::-webkit-input-placeholder {
+    font-family: $font-family;
+    color: $color;
+    opacity: $opacity;
+    font-size: $font-size;
+  }
+}

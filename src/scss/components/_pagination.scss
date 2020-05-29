@@ -1,0 +1,42 @@
+// =========================
+// PAGONATION
+// =========================
+
+.pagination {
+  @include position-flex(column, center, center);
+  @include size-custom(100%, auto);
+  @include padding(20px, 0, 20px, 0);
+
+  .c-sliding-pagination {
+    &__list {
+      @include position-flex(row, center, center);
+    }
+
+    &__list-element {
+      @include position-flex(row, center, center);
+      @include padding(10px, 10px, 10px, 10px);
+      @include border-radius(50%);
+
+      &--active {
+        a {
+          color: map_get($yellow-scale-colors, yellow-100);
+        }
+      }
+
+      &--active:hover {
+        color: map_get($yellow-scale-colors, yellow-100);
+        cursor: default;
+      }
+
+      &--disabled {
+        background: none;
+        color: map_get($grey-scale-colors, grey-100);
+        cursor: not-allowed;
+      }
+    }
+
+    &__page {
+      color: map_get($navy-scale-colors, navy-100);
+    }
+  }
+}

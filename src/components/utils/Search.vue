@@ -2,8 +2,10 @@
   <div class="search">
     <input
       type="text"
-      placeholder="Search pharse"
+      class="search__input"
+      placeholder="What you wanna see today?..."
       v-model="searchTerm"
+      @keyup.enter="setSearch(searchTerm)"
       @keyup="setSearch(searchTerm)"
     />
   </div>

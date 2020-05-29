@@ -1,14 +1,24 @@
 <template>
-  <div class="movies__list">
-    <Pagination></Pagination>
-    <div v-if="getAvailableMovieList.length">
-      <MovieSingle
-        v-for="movie in getAvailableMovieList"
-        :key="movie.id"
-        :movie="movie"
-      ></MovieSingle>
+  <div class="dashboard__container">
+    <div class="dashboard__result result">
+      <div
+        class="result--success"
+        v-if="getAvailableMovieList.length"
+      >
+        <MovieSingle
+          v-for="movie in getAvailableMovieList"
+          :key="movie.id"
+          :movie="movie"
+        ></MovieSingle>
+      </div>
+      <div
+        class="result--failure"
+        v-else
+      >No data to display</div>
     </div>
-    <div v-else>No data to display</div>
+    <div class="dashboard__pagination">
+      <Pagination></Pagination>
+    </div>
   </div>
 </template>
 
@@ -29,12 +39,3 @@ export default {
   }
 }
 </script>
-<style scoped lang="scss">
-.movies__list {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  height: auto;
-}
-</style>

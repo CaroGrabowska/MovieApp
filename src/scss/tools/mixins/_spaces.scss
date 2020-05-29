@@ -1,0 +1,11 @@
+//=========================
+// SPACES
+// =========================
+
+@mixin margin($top, $right, $bottom, $left) {
+  margin: $top $right $bottom $left;
+}
+
+@mixin padding($top, $right, $bottom, $left) {
+  padding: $top $right $bottom $left;
+}

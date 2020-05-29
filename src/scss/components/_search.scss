@@ -1,0 +1,40 @@
+// =========================
+// SEARCH
+// =========================
+
+.search {
+  @include position-flex(column, center, center);
+  @include size-custom(100%, false);
+  @include margin(25px, 0, 25px, 0);
+
+  &__input {
+    @include size-custom(450px, 50px);
+    @include padding(0, 10px, 0, 10px);
+    @include background-color(map_get($white-scale-colors, white-100));
+    @include border(all, 1px, solid, map_get($white-scale-colors, white-100));
+    @include border-radius(30px);
+    font-family: $font-face;
+    font-size: 13px;
+    font-weight: map_get($font-weight, medium);
+    color: map_get($navy-scale-colors, navy-100);
+    letter-spacing: 1px;
+
+    &:focus {
+      border: 1px solid map_get($navy-scale-colors, navy-100);
+      transition: 0.35s ease;
+      color: map_get($navy-scale-colors, navy-100);
+      &::-webkit-input-placeholder {
+        transition: opacity 0.45s ease;
+        opacity: 0;
+      }
+      &::-moz-placeholder {
+        transition: opacity 0.45s ease;
+        opacity: 0;
+      }
+      &:-ms-placeholder {
+        transition: opacity 0.45s ease;
+        opacity: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+//=========================
+// GRID BREAKPOINTS
+// =========================
+
+$breakpoints: (
+  xxs: 0,
+  xs: 320px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xlg: 1024px,
+  xl: 1280px,
+  extra-xl: 1550px,
+);
+
+$orientation: (
+  landscape: landscape,
+  portrait: portrait,
+);

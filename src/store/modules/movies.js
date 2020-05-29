@@ -4,6 +4,7 @@ import { http, paramDefault } from '../../api/request';
 // TYPES
 import * as mutation from '../types/mutation';
 import apiEndpoints from '../../api/endpoints';
+import apiDefaults from '../../api/defaults';
 
 // =========================
 // STATE
@@ -34,7 +35,10 @@ const getters = {
         title: movie.title,
         original_title: movie.original_title,
         popularity: movie.popularity,
-        vote_average: movie.vote_average
+        vote_average: movie.vote_average,
+        poster_path: `${apiDefaults.IMG_URL}${movie.poster_path}`,
+        release_date: movie.release_date,
+        vote_count: movie.vote_count
       };
     });
   },

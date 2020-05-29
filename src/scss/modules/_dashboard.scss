@@ -1,0 +1,33 @@
+// =========================
+// DASHBOARD
+// =========================
+
+.dashboard {
+  @include position-flex(column, false, false);
+  @include size-custom(100%, auto);
+  @include size-max(100%, false);
+
+  &__container {
+    @include position-flex(column, false, false);
+    @include padding(40px, 20px, 40px, 20px);
+  }
+
+  &__result {
+    @include position-flex(column, flex-start, flex-start);
+    @include size-custom(100%, auto);
+  }
+}
+
+.result {
+  &--success {
+    @include position-flex(row, flex-start, space-around);
+    @include size-custom(100%, auto);
+
+    flex-wrap: wrap;
+  }
+
+  &--failure {
+    @include position-flex(column, flex-start, center);
+    @include size-custom(100%, auto);
+  }
+}

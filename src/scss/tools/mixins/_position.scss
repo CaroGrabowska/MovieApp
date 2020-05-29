@@ -1,0 +1,29 @@
+//=========================
+// POSITION
+// =========================
+
+@mixin position($pos, $top: false, $right:false, $bottom:false, $left:false) {
+  position: $pos;
+
+  @if $top { top: $top; }
+
+  @if $right { right: $right; }
+
+  @if $bottom { bottom: $bottom; }
+
+  @if $left { left: $left; }
+}
+
+@mixin pseudo-elements($content,$display, $pos, $top: false, $right: false, $bottom: false , $left: false ) {
+  content: $content;
+  display: $display;
+  position: $pos;
+
+  @if $top { top: $top; }
+
+  @if $right { right: $right; }
+
+  @if $bottom { bottom: $bottom; }
+
+  @if $left { left: $left; }
+}

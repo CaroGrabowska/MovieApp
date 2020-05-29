@@ -1,0 +1,15 @@
+//=========================
+// HOVER MIXINS
+// =========================
+
+@mixin hover-link($color, $text-decoration) {
+  color: $color;
+  text-decoration: $text-decoration;
+}
+
+@mixin hover-button($text-decoration, $color, $bordercolor, $bgcolor) {
+  color: $color;
+  background-color: $bgcolor;
+  border-color: $bordercolor;
+  text-decoration: $text-decoration;
+}

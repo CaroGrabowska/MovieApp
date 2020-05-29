@@ -1,0 +1,15 @@
+//=========================
+// BACKGROUND POSITION
+// =========================
+
+@mixin background-cover($position: center) {
+  background-position: $position / cover no-repeat;
+}
+
+@mixin background-color($bgcolor) {
+  background-color: $bgcolor;
+}
+
+@mixin background-image($bgimage) {
+  background-image: $bgimage;
+}

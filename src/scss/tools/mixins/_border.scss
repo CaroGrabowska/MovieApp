@@ -1,0 +1,17 @@
+//=========================
+// BORDERS
+// =========================
+
+@mixin border($direction, $width, $style, $color) {
+  @if ($direction == all) {
+    border: $width $style $color;
+  }
+
+  @else {
+    border-#{$direction}: $width $style $color;
+  }
+}
+
+@mixin border-radius($radius) {
+  border-radius: $radius;
+}

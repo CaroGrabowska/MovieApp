@@ -1,0 +1,29 @@
+//=========================
+// FONT
+// =========================
+
+@mixin font-structure($font-family, $size: false, $weight: false) {
+  font-family: $font-family, sans-serif;
+
+  @if $size {
+    font-size: $size;
+  }
+
+  @if $weight {
+    font-weight: $weight;
+  }
+}
+
+@mixin font-skin($color: false, $letter-spacing: false, $text-transform: false) {
+  @if $color {
+    color: $color;
+  }
+
+  @if $letter-spacing {
+    letter-spacing: $letter-spacing;
+  }
+
+  @if $text-transform {
+    text-transform: $text-transform;
+  }
+}

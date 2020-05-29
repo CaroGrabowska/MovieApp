@@ -1,0 +1,11 @@
+@mixin media-query ($type, $breakpoints) {
+  @media screen and ($type + -width: $breakpoints) {
+    @content;
+  }
+}
+
+@mixin orientation ($type) {
+  @media (orientation: $type) {
+    @content;
+  }
+}

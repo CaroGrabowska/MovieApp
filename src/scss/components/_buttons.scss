@@ -1,0 +1,31 @@
+// =========================
+// BUTTONS
+// =========================
+
+.button {
+  &__input {
+    @include border-radius(20px);
+    line-height: 1.2;
+
+    margin-bottom: 10px;
+    margin-left: 15px;
+
+    border-color: map_get($yellow-scale-colors, yellow-100);
+    background-color: map_get($white-scale-colors, white-100);
+    color: map_get($yellow-scale-colors, yellow-100);
+
+    &.active {
+      border-color: map_get($yellow-scale-colors, yellow-100);
+      background-color: map_get($yellow-scale-colors, yellow-100);
+      color: map_get($white-scale-colors, white-100);
+
+      box-shadow: none;
+    }
+
+    &:hover {
+      border-color: map_get($yellow-scale-colors, yellow-100);
+      background-color: map_get($yellow-scale-colors, yellow-100);
+      color: map_get($white-scale-colors, white-100);
+    }
+  }
+}

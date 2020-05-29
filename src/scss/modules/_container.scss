@@ -1,0 +1,12 @@
+// =========================
+// CONTAINER
+// =========================
+
+.app-container {
+  @include size-custom(100%, 100%);
+}
+
+.container {
+  @include position-flex(column, false, false);
+  @include size-custom(100%, 100%);
+}

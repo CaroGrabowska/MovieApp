@@ -1,0 +1,28 @@
+//=========================
+// DISPLAY
+// =========================
+
+@mixin position-flex ($direction-variation, $align, $justify) {
+  display: flex;
+  flex-direction: $direction-variation;
+
+  @if $direction-variation == column {
+    @if $align { align-items: $align; }
+
+    @if $justify { justify-content: $justify; }
+  }
+
+  @else {
+    @if $align { align-items: $align; }
+
+    @if $justify { justify-content: $justify; }
+  }
+}
+
+@mixin position-grid ($column-template, $row-template, $gap:false) {
+  display: grid;
+  grid-template-columns: $column-template;
+  grid-template-rows: $row-template;
+
+  @if $gap { grid-gap: $gap; }
+}

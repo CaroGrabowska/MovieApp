@@ -1,0 +1,15 @@
+// =========================
+// TOOLKIT
+// =========================
+
+.toolkit {
+  @include position-flex(column, false, false);
+  @include size-custom(100%, auto);
+  @include size-max(100%, false);
+  @include background-color(map_get($navy-scale-colors, navy-100));
+
+  &__search {
+    @include position-flex(column, false, false);
+    @include size-custom(100%, auto);
+  }
+}

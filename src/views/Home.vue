@@ -1,9 +1,19 @@
 <template>
-  <div class="wrapper">
-    <app-search />
-    <app-sort />
-    <app-filter />
-    <app-movie-list />
+  <div class="container container--home">
+    <div class="toolkit">
+      <div class="toolkit__search">
+        <app-search />
+      </div>
+      <div class="toolkit__sort">
+        <app-sort />
+      </div>
+      <div class="toolkit__filter">
+        <app-filter />
+      </div>
+    </div>
+    <div class="dashboard">
+      <app-movie-list />
+    </div>
   </div>
 </template>
 
