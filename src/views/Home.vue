@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="wrapper">
     <app-search />
     <app-sort />
     <app-filter />
@@ -9,15 +9,15 @@
 
 <script>
 // @ is an alias to /src
-import MoviesList from '@/components/movies/MoviesList.vue'
-import Filter from '@/components/Filter.vue'
-import Search from '@/components/Search.vue'
-import Sort from '@/components/Sort.vue'
+import MovieList from '@/components/movie/MovieList.vue'
+import Filter from '@/components/utils/Filter.vue'
+import Search from '@/components/utils/Search.vue'
+import Sort from '@/components/utils/Sort.vue'
 
 export default {
   name: 'Home',
   components: {
-    'app-movie-list': MoviesList,
+    'app-movie-list': MovieList,
     'app-filter': Filter,
     'app-search': Search,
     'app-sort': Sort

@@ -2,11 +2,11 @@
   <div class="movies__list">
     <Pagination></Pagination>
     <div v-if="getAvailableMovieList.length">
-      <MoviesListItem
+      <MovieSingle
         v-for="movie in getAvailableMovieList"
         :key="movie.id"
         :movie="movie"
-      ></MoviesListItem>
+      ></MovieSingle>
     </div>
     <div v-else>No data to display</div>
   </div>
@@ -14,18 +14,18 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import MoviesListItem from './MoviesListItem.vue';
-import Pagination from '../Pagination.vue';
+import MovieSingle from './MovieSingle.vue';
+import Pagination from '../utils/Pagination';
 
 export default {
   name: 'MoviesList',
-  components: { MoviesListItem, Pagination },
+  components: { MovieSingle, Pagination },
   computed: mapGetters(['getAvailableMovieList']),
   methods: {
-    ...mapActions(['displayFullList'])
+    ...mapActions(['fetchMovieList'])
   },
   created () {
-    this.displayFullList();
+    this.fetchMovieList();
   }
 }
 </script>

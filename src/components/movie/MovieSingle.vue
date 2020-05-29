@@ -16,7 +16,7 @@
 import { mapActions } from 'vuex';
 
 export default {
-  name: 'MoviesListItem',
+  name: 'MovieSingle',
   props: ['movie'],
   methods: {
     ...mapActions(['setPreviewItem']),

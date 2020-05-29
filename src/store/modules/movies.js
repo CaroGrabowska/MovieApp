@@ -10,21 +10,16 @@ import apiEndpoints from '../../api/endpoints';
 // =========================
 
 const state = {
-  movies: [],
-  filter: '',
-  searchTerm: '',
-  page: {
-    total: null,
-    current: 0
-  },
-  preview: {
-    id: null
-  },
-  movie_details: [],
-  sort: {
-    orderBy: '',
-    orderDirection: ''
-  }
+  moviesList: null,
+  moviesListStatusPending: null,
+  moviesLcatsListStatusSuccess: null,
+  moviesLcatsListStatusFail: null,
+  moviesListFilter: null,
+  moviesListSearch: null,
+  moviesListPages: { total: null, current: null },
+  moviesListPreview: { id: null },
+  moviesListDetails: [],
+  moviesListSort: { orderBy: null, orderDirection: null }
 };
 
 // =========================
@@ -33,7 +28,7 @@ const state = {
 
 const getters = {
   getAvailableMovieList: state => {
-    return state.movies.map(movie => {
+    return state.moviesList.map(movie => {
       return {
         id: movie.id,
         title: movie.title,
@@ -43,16 +38,10 @@ const getters = {
       };
     });
   },
-  getAvailablePageList: state => state.page.total,
-  getCurrentPage: state => state.page.current,
-  getAvailableFilter: state => state.filter,
-  getDetailsMovie: state => {
-    return {
-      id: state.movie_details.id,
-      title: state.movie_details.title,
-      genres: state.movie_details.genres
-    }
-  }
+  getAvailablePageList: state => state.moviesListPages.total,
+  getCurrentPage: state => state.moviesListPages.current,
+  getAvailableFilter: state => state.moviesListFilter,
+  getDetailsMovie: state => state.moviesListDetails
 }
 
 // =========================
@@ -60,37 +49,50 @@ const getters = {
 // =========================
 
 const mutations = {
-  [mutation.SET_AVAILABLE_LIST] (state, movies) {
-    state.movies = movies;
+
+  [mutation.SET_MOVIE_LIST_STATUS_PENDING] (state, payload) {
+    state.moviesListStatusPending = payload;
   },
 
-  [mutation.SET_FILTER_TERM] (state, filterStatus) {
-    state.filter = filterStatus;
+  [mutation.SET_MOVIE_LIST_STATUS_SUCCESS] (state, payload) {
+    state.moviesListStatusSuccess = payload;
   },
 
-  [mutation.SET_PAGES] (state, { total, current }) {
-    state.page.total = total;
-    state.page.current = current;
+  [mutation.SET_MOVIE_LIST_STATUS_FAIL] (state, payload) {
+    state.moviesListStatusFail = payload;
   },
 
-  [mutation.SET_SEARCH_TERM] (state, searchTerm) {
-    state.searchTerm = searchTerm;
+  [mutation.SET_MOVIE_AVAILABLE_LIST] (state, payload) {
+    state.moviesList = payload;
   },
 
-  [mutation.SET_PREVIEW_ITEM] (state, id) {
-    state.preview.id = id;
+  [mutation.SET_MOVIE_PAGES] (state, payload) {
+    state.moviesListPages.total = payload.total;
+    state.moviesListPages.current = payload.current;
   },
 
-  [mutation.SET_PREVIEW_ITEM_DETAILS] (state, details) {
-    state.movie_details = details;
+  [mutation.SET_MOVIE_FILTER_TERM] (state, payload) {
+    state.moviesListFilter = payload;
   },
 
-  [mutation.SET_SORT_DETAILS] (state, data) {
-    state.sort = data;
+  [mutation.SET_MOVIE_SEARCH_TERM] (state, payload) {
+    state.moviesListSearch = payload;
   },
 
-  [mutation.SET_SORT_LIST] (state, moviesSort) {
-    state.movies = moviesSort;
+  [mutation.SET_MOVIE_PREVIEW_ITEM] (state, payload) {
+    state.moviesListPreview.id = payload;
+  },
+
+  [mutation.SET_MOVIE_PREVIEW_ITEM_DETAILS] (state, payload) {
+    state.moviesListDetails = payload;
+  },
+
+  [mutation.SET_MOVIE_SORT_DETAILS] (state, payload) {
+    state.moviesListSort = payload;
+  },
+
+  [mutation.SET_MOVIE_SORT_LIST] (state, payload) {
+    state.moviesLists = payload;
   }
 }
 
@@ -99,76 +101,107 @@ const mutations = {
 // =========================
 
 const actions = {
-  displayFullList ({ commit, state }, pageToDisplay = 1) {
-    const request = http(apiEndpoints.discover);
+  fetchMovieList ({ commit, state }, pageToDisplay = 1) {
+    commit(mutation.SET_MOVIE_LIST_STATUS_PENDING, true);
+    commit(mutation.SET_MOVIE_AVAILABLE_LIST, []);
 
-    request
+    const axios = http(apiEndpoints.discover);
+
+    axios
       .get('', { params: { ...paramDefault, page: pageToDisplay } })
       .then(response => {
-        commit(mutation.SET_PAGES, {
-          total: response.data.total_pages,
-          current: response.data.page
-        });
-        commit(mutation.SET_AVAILABLE_LIST, response.data.results);
+        commit(mutation.SET_MOVIE_AVAILABLE_LIST, response.data.results);
+        commit(mutation.SET_MOVIE_PAGES, { total: response.data.total_pages, current: response.data.page });
+        commit(mutation.SET_MOVIE_LIST_STATUS_SUCCESS, true);
+        commit(mutation.SET_MOVIE_LIST_STATUS_FAIL, false);
       })
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(e => {
+        commit(mutation.SET_MOVIE_LIST_STATUS_SUCCESS, false);
+        commit(mutation.SET_MOVIE_LIST_STATUS_FAIL, true);
+      })
+      .finally(() => {
+        commit(mutation.SET_MOVIE_LIST_STATUS_PENDING, false);
+      })
   },
 
-  async displayFilteredList ({ commit, state }, pageToDisplay = 1) {
-    const instance = http(apiEndpoints.default);
-    const response = await instance.get(`/${state.filter}`, {
-      params: { ...paramDefault, page: pageToDisplay }
-    });
+  fetchFilterList ({ commit, state }, pageToDisplay = 1) {
+    commit(mutation.SET_MOVIE_LIST_STATUS_PENDING, true);
+    commit(mutation.SET_MOVIE_AVAILABLE_LIST, []);
 
-    commit(mutation.SET_PAGES, {
-      total: response.data.total_pages,
-      current: response.data.page
-    });
-    commit(mutation.SET_AVAILABLE_LIST, response.data.results);
+    const axios = http(apiEndpoints.default);
+
+    axios
+      .get(`${state.moviesListFilter}`, { params: { ...paramDefault, page: pageToDisplay } })
+      .then(response => {
+        commit(mutation.SET_MOVIE_AVAILABLE_LIST, response.data.results);
+        commit(mutation.SET_MOVIE_PAGES, { total: response.data.total_pages, current: response.data.page });
+        commit(mutation.SET_MOVIE_LIST_STATUS_SUCCESS, true);
+        commit(mutation.SET_MOVIE_LIST_STATUS_FAIL, false);
+      })
+      .catch(e => {
+        commit(mutation.SET_MOVIE_LIST_STATUS_SUCCESS, false);
+        commit(mutation.SET_MOVIE_LIST_STATUS_FAIL, true);
+      })
+      .finally(() => {
+        commit(mutation.SET_MOVIE_LIST_STATUS_PENDING, false);
+      })
   },
 
-  async displaySearchList ({ commit, state }, pageToDisplay = 1) {
-    const instance = http(apiEndpoints.search);
-    const response = await instance.get('', {
-      params: { ...paramDefault, page: pageToDisplay, query: state.searchTerm }
-    });
+  fetchSearchList ({ commit, state }, searchTerm, pageToDisplay = 1) {
+    commit(mutation.SET_MOVIE_LIST_STATUS_PENDING, true);
+    commit(mutation.SET_MOVIE_AVAILABLE_LIST, []);
 
-    commit(mutation.SET_PAGES, {
-      total: response.data.total_pages,
-      current: response.data.page
-    });
+    const axios = http(apiEndpoints.search);
 
-    commit(mutation.SET_AVAILABLE_LIST, response.data.results);
+    axios
+      .get('', { params: { ...paramDefault, page: pageToDisplay, query: `${state.moviesListSearch}` } })
+      .then(response => {
+        commit(mutation.SET_MOVIE_AVAILABLE_LIST, response.data.results);
+        commit(mutation.SET_MOVIE_PAGES, { total: response.data.total_pages, current: response.data.page });
+        commit(mutation.SET_MOVIE_LIST_STATUS_SUCCESS, true);
+        commit(mutation.SET_MOVIE_LIST_STATUS_FAIL, false);
+      })
+      .catch(e => {
+        commit(mutation.SET_MOVIE_LIST_STATUS_SUCCESS, false);
+        commit(mutation.SET_MOVIE_LIST_STATUS_FAIL, true);
+      })
+      .finally(() => {
+        commit(mutation.SET_MOVIE_LIST_STATUS_PENDING, false);
+      })
   },
 
-  displayPreviewItem: ({ commit, state }) => {
-    const request = http(apiEndpoints.default);
+  fetchPreviewItem ({ commit, state }) {
+    commit(mutation.SET_MOVIE_LIST_STATUS_PENDING, true);
+    const axios = http(apiEndpoints.default);
 
     Promise.all([
-      request.get(`${state.preview.id}`, { params: { ...paramDefault } }),
-      request.get(`${state.preview.id}/credits`, { params: { ...paramDefault } })
+      axios.get(`${state.moviesListPreview.id}`, { params: { ...paramDefault } }),
+      axios.get(`${state.moviesListPreview.id}/credits`, { params: { ...paramDefault } })
     ])
-
       .then(response => {
-        const obj = Object.assign({}, ...response.map(item => ({ ...item.data })))
-        return obj;
+        const concatData = Object.assign({}, ...response.map(resp => ({ ...resp.data })))
+        return concatData;
       })
       .then(data => {
-        commit(mutation.SET_PREVIEW_ITEM_DETAILS, data);
+        commit(mutation.SET_MOVIE_PREVIEW_ITEM_DETAILS, data);
+        commit(mutation.SET_MOVIE_LIST_STATUS_SUCCESS, true);
+        commit(mutation.SET_MOVIE_LIST_STATUS_FAIL, false);
       })
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(e => {
+        commit(mutation.SET_MOVIE_LIST_STATUS_SUCCESS, false);
+        commit(mutation.SET_MOVIE_LIST_STATUS_FAIL, true);
+      })
+      .finally(() => {
+        commit(mutation.SET_MOVIE_LIST_STATUS_PENDING, false);
+      })
   },
 
-  applaySorting ({ commit, state, dispatch }, data) {
-    const movieSet = state.movies;
+  applayListSorting ({ commit, state, dispatch }, data) {
+    const movieListSet = state.moviesList;
 
     switch (data.orderBy) {
       case 'votes':
-        movieSet.sort((a, b) => {
+        movieListSet.sort((a, b) => {
           if (data.orderDirection === 'desc') {
             return ((a.vote_average === b.vote_average) ? 0 : ((a.vote_average < b.vote_average) ? 1 : -1));
           } else {
@@ -177,7 +210,7 @@ const actions = {
         });
         break;
       case 'popularity':
-        movieSet.sort((a, b) => {
+        movieListSet.sort((a, b) => {
           if (data.orderDirection === 'desc') {
             return ((a.popularity === b.popularity) ? 0 : ((a.popularity < b.popularity) ? 1 : -1));
           } else {
@@ -186,41 +219,41 @@ const actions = {
         });
         break;
     }
-    commit(mutation.SET_SORT_LIST, movieSet);
+    commit(mutation.SET_MOVIE_SORT_LIST, movieListSet);
   },
 
-  setFilter ({ commit, dispatch }, filterStatus) {
-    commit(mutation.SET_FILTER_TERM, filterStatus);
-    dispatch('displayFilteredList');
+  async setFilter ({ commit, dispatch }, filterStatus) {
+    await commit(mutation.SET_MOVIE_FILTER_TERM, filterStatus);
+    dispatch('fetchFilterList', filterStatus);
   },
 
-  setOrderDirection ({ commit, dispatch }, data) {
-    commit(mutation.SET_SORT_DETAILS, data);
-    dispatch('applaySorting', { orderBy: state.sort.orderBy, orderDirection: state.sort.orderDirection });
+  async setSearch ({ commit, dispatch }, searchTerm) {
+    await commit(mutation.SET_MOVIE_SEARCH_TERM, searchTerm);
+    dispatch('fetchSearchList', searchTerm);
+  },
+
+  async setPreviewItem ({ commit, dispatch }, id) {
+    await commit(mutation.SET_MOVIE_PREVIEW_ITEM, id);
+    dispatch('fetchPreviewItem');
   },
 
   setPageToDisplay ({ commit, dispatch, state }, displayPage) {
-    const filterState = state.filter;
-    const searchState = state.searchTerm;
+    const filterState = state.moviesListFilter;
+    const searchState = state.moviesListSearch;
     if (filterState) {
-      dispatch('displayFilteredList', displayPage);
+      dispatch('fetchFilterList', displayPage);
     } else if (searchState) {
-      dispatch('displaySearchList', displayPage);
+      dispatch('fetchSearchList', displayPage);
     } else {
-      dispatch('displayFullList', displayPage);
+      dispatch('fetchMovieList', displayPage);
     }
   },
 
-  setSearch ({ commit, dispatch }, searchTerm) {
-    commit(mutation.SET_SEARCH_TERM, searchTerm);
-    dispatch('displaySearchList');
-  },
-
-  setPreviewItem ({ commit, dispatch }, id) {
-    commit(mutation.SET_PREVIEW_ITEM, id);
-    dispatch('displayPreviewItem');
+  setOrderDirection ({ commit, dispatch }, data) {
+    commit(mutation.SET_MOVIE_SORT_DETAILS, data);
+    dispatch('applayListSorting', { orderBy: state.moviesListSort.orderBy, orderDirection: state.moviesListSort.orderDirection });
   }
-};
+}
 
 export default {
   /* namespaced: true, */

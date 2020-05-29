@@ -1,17 +1,19 @@
 <template>
-  <div class="movie-single">
-    <app-movie-details />
+  <div class="movie-details">
+    <div class="movie-details__container">
+      <app-movie-details />
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import MovieSingleItemDetails from '@/components/movies/MovieSingleItemDetails.vue'
+import MovieSingleDetails from '@/components/movie/MovieSingleDetails.vue'
 
 export default {
   name: 'MovieSingle',
   components: {
-    'app-movie-details': MovieSingleItemDetails
+    'app-movie-details': MovieSingleDetails
   }
 }
 </script>

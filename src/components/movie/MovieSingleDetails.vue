@@ -17,7 +17,7 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'MovieSingleItemDetails',
+  name: 'MovieSingleDetails',
   computed: mapGetters(['getDetailsMovie'])
 }
 </script>

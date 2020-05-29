@@ -62,12 +62,12 @@ export default {
     ...mapGetters(['getAvailableFilter'])
   },
   methods: {
-    ...mapActions(['setFilter', 'displayFullList']),
+    ...mapActions(['setFilter', 'fetchMovieList']),
 
     displayListRest () {
       this.filterStatus = '';
       this.setFilter(this.filterStatus);
-      this.displayFullList()
+      this.fetchMovieList()
     }
   }
 }
