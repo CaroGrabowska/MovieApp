@@ -1,11 +1,14 @@
 <template>
   <div class="movies__list">
     <Pagination></Pagination>
-    <MoviesListItem
-      v-for="movie in getAvailableMovieList"
-      :key="movie.id"
-      :movie="movie"
-    ></MoviesListItem>
+    <div v-if="getAvailableMovieList.length">
+      <MoviesListItem
+        v-for="movie in getAvailableMovieList"
+        :key="movie.id"
+        :movie="movie"
+      ></MoviesListItem>
+    </div>
+    <div v-else>No data to display</div>
   </div>
 </template>
 
@@ -32,5 +35,6 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
+  height: auto;
 }
 </style>

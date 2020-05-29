@@ -1,19 +1,40 @@
 <template>
   <div class="movie">
-    {{ movie.title }}
+    <p>{{ movie.id }}</p>
+    <p>{{ movie.title }}</p>
+    <p>{{ movie.original_title }}</p>
+    <p>{{ movie.popularity }}</p>
+    <p>{{ movie.vote_average}}</p>
+    <button
+      :id="movie.id"
+      @click="singleMovie(movie.id)"
+    >View</button>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'MoviesListItem',
-  props: ['movie']
+  props: ['movie'],
+  methods: {
+    ...mapActions(['setPreviewItem']),
+
+    singleMovie (id) {
+      this.setSingleMovieURL(id);
+      this.setPreviewItem(id)
+    },
+    setSingleMovieURL (id) {
+      this.$router.push('/movie/' + id)
+    }
+  }
 }
 </script>
 <style lang="scss">
 .movie {
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   margin: 10px;
   border: 1px solid black;
 }

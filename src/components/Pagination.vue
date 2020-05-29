@@ -1,11 +1,13 @@
 <template>
   <div class="pagination">
-    {{ getCurrentPage }}/{{ getAvailablePageList }}
-    <sliding-pagination
-      :current="currentPage"
-      :total="getAvailablePageList"
-      @page-change="pageChangeHandler"
-    ></sliding-pagination>
+    <div>
+      {{ getCurrentPage }}/{{ getAvailablePageList }}
+      <sliding-pagination
+        :current="currentPage"
+        :total="getAvailablePageList"
+        @page-change="pageChangeHandler"
+      ></sliding-pagination>
+    </div>
   </div>
 </template>
 
