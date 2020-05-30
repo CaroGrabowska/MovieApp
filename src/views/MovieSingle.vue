@@ -1,8 +1,6 @@
 <template>
-  <div class="movie-details">
-    <div class="movie-details__container">
-      <app-movie-details />
-    </div>
+  <div class="container--details">
+    <app-movie-details />
   </div>
 </template>
 

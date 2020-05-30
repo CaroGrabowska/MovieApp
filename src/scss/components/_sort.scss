@@ -1,0 +1,53 @@
+// =========================
+// SORT
+// =========================
+
+.sort {
+  &__container {
+    @include position-flex(row, center, center);
+    @include size-custom(100%, auto);
+
+    flex-wrap: wrap;
+  }
+
+  &__title {
+    @include margin(5px, 10px, 5px, 10px);
+    font-family: $font-face;
+    font-size: 20px;
+    font-weight: map_get($font-weight, semi-bold);
+    color: map_get($white-scale-colors, white-100);
+    letter-spacing: 1px;
+  }
+
+  &__select {
+    @include padding(10px, 30px, 10px, 30px);
+    @include margin(0, 10px, 0, 10px);
+    @include background-color(map_get($yellow-scale-colors, yellow-100));
+    @include border(all, 1px, solid, map_get($yellow-scale-colors, yellow-100));
+    @include border-radius(20px);
+    color: map_get($white-scale-colors, white-100);
+    font-family: $font-face;
+    font-size: 14px;
+    font-weight: map_get($font-weight, medium);
+    letter-spacing: 1px;
+  }
+
+  &__button {
+    @include padding(10px, 30px, 10px, 30px);
+    @include margin(0, 10px, 0, 10px);
+    @include background-color(map_get($white-scale-colors, white-100));
+    @include border(all, 1px, solid, map_get($yellow-scale-colors, yellow-100));
+    @include border-radius(20px);
+    font-family: $font-face;
+    font-size: 15px;
+    font-weight: map_get($font-weight, medium);
+    color: map_get($yellow-scale-colors, yellow-100);
+    letter-spacing: 1px;
+  }
+}
+
+.active {
+  @include background-color(map_get($yellow-scale-colors, yellow-100));
+  @include border-radius(20px);
+  color: map_get($white-scale-colors, white-100);
+}

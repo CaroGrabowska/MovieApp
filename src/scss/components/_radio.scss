@@ -1,0 +1,66 @@
+//=========================
+// CHECKBOX
+// =========================
+
+.filter {
+  @include position-flex(row, center, center);
+  @include size-custom(100%, auto);
+
+  flex-wrap: wrap;
+
+  &__input {
+    @include margin(1rem, 1rem, 1rem, 1rem);
+    label {
+      display: inline-block;
+      @include size-custom(8em, auto);
+      @include padding(0.5rem, 2rem, 0.5rem, 2rem);
+      @include background-color(map_get($white-scale-colors, white-100));
+      @include border(all, 1px, solid, map_get($yellow-scale-colors, yellow-100));
+      @include border-radius(20px);
+
+      color: map_get($yellow-scale-colors, yellow-100);
+      font-family: $font-face;
+      font-size: 15px;
+      font-weight: map_get($font-weight, semi-bold);
+      letter-spacing: 1px;
+      text-align: center;
+      cursor: pointer;
+
+      &:hover {
+        @include background-color(map_get($yellow-scale-colors, yellow-100));
+        color: map_get($white-scale-colors, white-100);
+      }
+    }
+
+    label.activeFilter {
+      @include background-color(map_get($yellow-scale-colors, yellow-100));
+      @include border(all, 1px, solid, map_get($yellow-scale-colors, yellow-100));
+
+      color: map_get($white-scale-colors, white-100);
+    }
+
+    input[type='radio'] {
+      display: none;
+
+      &:checked + label {
+        @include background-color(map_get($yellow-scale-colors, yellow-100));
+        color: map_get($white-scale-colors, white-100);
+      }
+      &:checked {
+        @include background-color(map_get($yellow-scale-colors, yellow-100));
+      }
+    }
+  }
+
+  &__reset {
+    @include padding(10px, 30px, 10px, 30px);
+    @include margin(0, 0, 0, 5px);
+    @include background-color(map_get($yellow-scale-colors, yellow-100));
+    @include border-radius(20px);
+    font-family: $font-face;
+    font-size: 15px;
+    font-weight: map_get($font-weight, semi-bold);
+    color: map_get($white-scale-colors, white-100);
+    letter-spacing: 1px;
+  }
+}

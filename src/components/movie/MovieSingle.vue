@@ -6,6 +6,7 @@
         :alt="movie.title"
       >
     </div>
+    <div class="single-preview__overlay"></div>
     <div class="single-preview__info">
       <div class="single-preview__title">{{ movie.title }}</div>
       <div class="single-preview__orgtitle">{{ movie.original_title }}</div>
@@ -21,8 +22,6 @@
             fill="#ffc107"
           /></svg>
         {{ movie.vote_average }}</div>
-    </div>
-    <div class="single-preview__view">
       <button
         class="single-preview__button"
         :id="movie.id"

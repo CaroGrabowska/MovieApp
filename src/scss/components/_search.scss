@@ -9,7 +9,7 @@
 
   &__input {
     @include size-custom(450px, 50px);
-    @include padding(0, 10px, 0, 10px);
+    @include padding(0, 20px, 0, 20px);
     @include background-color(map_get($white-scale-colors, white-100));
     @include border(all, 1px, solid, map_get($white-scale-colors, white-100));
     @include border-radius(30px);
@@ -20,19 +20,22 @@
     letter-spacing: 1px;
 
     &:focus {
-      border: 1px solid map_get($navy-scale-colors, navy-100);
-      transition: 0.35s ease;
+      @include background-color(map_get($yellow-scale-colors, yellow-100));
+      @include border(all, 1px, solid, map_get($yellow-scale-colors, yellow-100));
       color: map_get($navy-scale-colors, navy-100);
+      @include transition(all, 0.35s, ease);
       &::-webkit-input-placeholder {
-        transition: opacity 0.45s ease;
+        @include transition(opacity, 0.45s, ease);
         opacity: 0;
       }
       &::-moz-placeholder {
-        transition: opacity 0.45s ease;
+        @include transition(opacity, 0.45s, ease);
+
         opacity: 0;
       }
       &:-ms-placeholder {
-        transition: opacity 0.45s ease;
+        @include transition(opacity, 0.45s, ease);
+
         opacity: 0;
       }
     }

@@ -1,5 +1,8 @@
 <template>
-  <div class="pagination">
+  <div
+    v-if="getAvailableMovieList.length"
+    class="pagination"
+  >
     <sliding-pagination
       :current="currentPage"
       :total="getAvailablePageList"
@@ -20,7 +23,7 @@ export default {
     }
   },
   components: { SlidingPagination },
-  computed: mapGetters(['getAvailablePageList', 'getCurrentPage']),
+  computed: mapGetters(['getAvailablePageList', 'getCurrentPage', 'getAvailableMovieList']),
   methods: {
     ...mapActions(['setPageToDisplay']),
     pageChangeHandler (selectedPage) {

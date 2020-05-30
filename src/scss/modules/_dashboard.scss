@@ -27,7 +27,12 @@
   }
 
   &--failure {
-    @include position-flex(column, flex-start, center);
+    @include position-flex(column, center, center);
     @include size-custom(100%, auto);
+    font-family: $font-face;
+    font-size: 25px;
+    font-weight: map_get($font-weight, semi-bold);
+    color: map_get($navy-scale-colors, navy-100);
+    letter-spacing: 1px;
   }
 }

@@ -14,7 +14,7 @@
       <div
         class="result--failure"
         v-else
-      >No data to display</div>
+      >Search result not found</div>
     </div>
     <div class="dashboard__pagination">
       <Pagination></Pagination>

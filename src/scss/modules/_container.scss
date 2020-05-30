@@ -9,4 +9,8 @@
 .container {
   @include position-flex(column, false, false);
   @include size-custom(100%, 100%);
+
+  &--details {
+    @include size-custom(100%, 100vh);
+  }
 }

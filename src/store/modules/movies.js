@@ -46,7 +46,7 @@ const getters = {
   getCurrentPage: state => state.moviesListPages.current,
   getAvailableFilter: state => state.moviesListFilter,
   getDetailsMovie: state => state.moviesListDetails
-}
+};
 
 // =========================
 // MUTATIONS

@@ -1,54 +1,68 @@
 <template>
   <div class="filter">
-    <label
-      for="toprated"
-      class="button"
-    >Top Rated
+    <div class="filter__input">
+      <label
+        for="toprated"
+        :class="{ 'activeFilter': filterStatus == 'top_rated' }"
+      >Top Rated </label>
       <input
         id="toprated"
         type="radio"
-        class="button__input"
         value="top_rated"
         name="filter"
+        checked
         v-model="filterStatus"
-        @change="setFilter(filterStatus)"
+        @change="setFilterStatus(filterStatus)"
       >
-      <div>Top Rated</div>
-    </label>
-    <label for="nowplaying">Now playing
+    </div>
+    <div class="filter__input">
+      <label
+        for="nowplaying"
+        :class="{ 'activeFilter': filterStatus == 'now_playing' }"
+      >Now playing</label>
       <input
         id="nowplaying"
         type="radio"
         value="now_playing"
         name="filter"
         v-model="filterStatus"
-        @change="setFilter(filterStatus)"
+        @change="setFilterStatus(filterStatus)"
       >
-    </label>
-    <label for="popular">Popular
+    </div>
+    <div class="filter__input">
+      <label
+        for="popular"
+        :class="{ 'activeFilter': filterStatus == 'popular' }"
+      >Popular</label>
       <input
         id="popular"
         type="radio"
         value="popular"
         name="filter"
         v-model="filterStatus"
-        @change="setFilter(filterStatus)"
+        @change="setFilterStatus(filterStatus)"
       >
-    </label>
-    <label for="upcoming">Upcoming
+    </div>
+    <div class="filter__input">
+      <label
+        for="upcoming"
+        :class="{ 'activeFilter': filterStatus == 'upcoming' }"
+      >Upcoming</label>
       <input
         id="upcoming"
         type="radio"
         value="upcoming"
         name="filter"
         v-model="filterStatus"
-        @change="setFilter(filterStatus)"
+        @change="setFilterStatus(filterStatus)"
       >
-    </label>
-    <button
-      class="reset"
-      @click="displayListRest()"
-    >Reset</button>
+    </div>
+    <div class="filter__reset">
+      <button
+        class="reset"
+        @click="displayListRest()"
+      >Reset all filters</button>
+    </div>
   </div>
 </template>
 
@@ -73,6 +87,11 @@ export default {
       this.filterStatus = '';
       this.setFilter(this.filterStatus);
       this.fetchMovieList()
+    },
+
+    setFilterStatus (status) {
+      this.filterStatus = status;
+      this.setFilter(status);
     }
   }
 }

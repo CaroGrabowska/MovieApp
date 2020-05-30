@@ -1,21 +1,24 @@
 <template>
-  <div class="filter">
-    <div>
-      Sort by:
-      <select v-model="orderBy">
+  <div class="sort">
+    <div class="sort__container">
+      <div class="sort__title">Sort by:</div>
+      <select
+        class="sort__select"
+        v-model="orderBy"
+      >
         <option value="votes">Votes</option>
         <option value="popularity">Popularity</option>
       </select>
-      <label class="filter-label">Order Direction</label>
+      <div class="sort__title">Order Direction:</div>
       <button
-        class="asc order-direction"
-        v-bind:class="{ 'active': orderDirection == 'asc' }"
-        v-on:click="setSortDetails('asc')"
-      >Asc</button><button
-        class="desc order-direction"
-        v-bind:class="{ 'active': orderDirection == 'desc' }"
-        v-on:click="setSortDetails('desc')"
-      >Desc</button>
+        class="sort__button"
+        :class="{ 'active': orderDirection == 'asc' }"
+        @click="setSortDetails('asc')"
+      >Ascending</button><button
+        class="sort__button"
+        :class="{ 'active': orderDirection == 'desc' }"
+        @click="setSortDetails('desc')"
+      >Descending</button>
     </div>
   </div>
 </template>
@@ -33,10 +36,9 @@ export default {
   methods: {
     ...mapActions(['setOrderDirection']),
     setSortDetails (direction) {
-      this.setOrderDirection({ orderBy: this.orderBy, orderDirection: direction })
+      this.setOrderDirection({ orderBy: this.orderBy, orderDirection: direction });
+      this.orderDirection = direction;
     }
   }
 };
 </script>
-<style>
-</style>
