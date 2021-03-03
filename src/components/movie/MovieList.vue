@@ -10,6 +10,7 @@
           :key="movie.id"
           :movie="movie"
         ></MovieSingle>
+        <div>Dummy text here</div>
       </div>
       <div
         class="result--failure"
