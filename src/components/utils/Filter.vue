@@ -4,7 +4,7 @@
       <label
         for="toprated"
         :class="{ 'activeFilter': filterStatus == 'top_rated' }"
-      >Top Rated </label>
+      >Top Rated</label>
       <input
         id="toprated"
         type="radio"
