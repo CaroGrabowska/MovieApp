@@ -15,7 +15,7 @@
   },
   "standard-version": {
     "skip": {
-        "tag": true
+      "tag": true
     }
   },
   "dependencies": {
