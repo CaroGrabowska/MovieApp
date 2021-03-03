@@ -4,7 +4,6 @@
     class="app-container"
   >
     <router-view />
-    <div> Testong footer of app</div>
   </div>
 </template>
 <style lang="scss">
