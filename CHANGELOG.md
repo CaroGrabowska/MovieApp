@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/CaroGrabowska/MovieApp/compare/v2.1.1...v2.2.0) (2021-03-03)
+
+
+### Features
+
+* **ui:** information with videos stock ([1ad44fa](https://github.com/CaroGrabowska/MovieApp/commit/1ad44fa439ec4a6a77b390568052a937709aa206))
+
+
+### Bug Fixes
+
+* config file ([e4cb3ca](https://github.com/CaroGrabowska/MovieApp/commit/e4cb3ca4f0d613345c261e6b6a58b7fef5176cd8))
+* npm script config file ([ec176e2](https://github.com/CaroGrabowska/MovieApp/commit/ec176e23060d0da2737a25bcec77e17459b96f96))
+* remove unnecessary space in componennt ([bffe9e2](https://github.com/CaroGrabowska/MovieApp/commit/bffe9e243c2ab3ca64279deb5be0c332bd5edce5))
+
 ### [2.1.2](https://github.com/CaroGrabowska/MovieApp/compare/v2.1.1...v2.1.2) (2021-03-03)
 
 
